@@ -80,37 +80,37 @@ init
 	// Check version by comparing the module size
 	var moduleSize = mainModule.ModuleMemorySize;
 	print("[TE:C Autosplitter] Module detected: " + mainModule.ModuleName + " with size " + moduleSize);
-	if (String.Equals(mainModule.ModuleName, "TetrisEffect-Win64-Shipping.exe"))
+	if(String.Equals(mainModule.ModuleName, "TetrisEffect-Win64-Shipping.exe"))
 	{
-		if (moduleSize == 86265856)
+		if(moduleSize == 86265856)
 		{
 			version = "Steam 1.2.6";
 			print("[TE:C Autosplitter] Detected Steam 1.2.6 game version");
 		}
-		else if (moduleSize == 85979136)
+		else if(moduleSize == 85979136)
 		{
 			version = "EGS 1.2.6";
 			print("[TE:C Autosplitter] Detected EGS 1.2.6 game version");
 		}
-		else if (moduleSize == 86261760)
+		else if(moduleSize == 86261760)
 		{
 			version = "Steam 1.2.5";
 			print("[TE:C Autosplitter] Detected Steam 1.2.5 game version");
 		}
-		else if (moduleSize == 85970944)
+		else if(moduleSize == 85970944)
 		{
 			version = "EGS 1.2.5";
 			print("[TE:C Autosplitter] Detected EGS 1.2.5 game version");
 		}
 	}
-	else if (String.Equals(mainModule.ModuleName, "TetrisEffect-WinGDK-Shipping.exe"))
+	else if(String.Equals(mainModule.ModuleName, "TetrisEffect-WinGDK-Shipping.exe"))
 	{
-		if (moduleSize == 88969216)
+		if(moduleSize == 88969216)
 		{
 			version = "Win10 1.2.6";
 			print("[TE:C Autosplitter] Detected Win10 1.2.6 game version");
 		}
-		else if (moduleSize == 88965120)
+		else if(moduleSize == 88965120)
 		{
 			version = "Win10 1.2.5";
 			print("[TE:C Autosplitter] Detected Win10 1.2.5 game version");
@@ -121,7 +121,7 @@ init
 // Start the timer if we are loaded into a level and it's level 0
 start
 {
-	if (current.ingame != 0 && current.level == 0)
+	if(current.ingame != 0 && current.level == 0)
 	{
 		print("[TE:C Autosplitter] Timer started");
 		return true;
@@ -131,7 +131,7 @@ start
 // Reset if we ever aren't loaded into a level
 reset
 {
-	if (current.ingame == 0)
+	if(current.ingame == 0)
 	{
 		print("[TE:C Autosplitter] Timer reset");
 		return true;
@@ -141,17 +141,17 @@ reset
 // Exactly what you'd expect
 split
 {
-	if (current.level != old.level) {
+	if(current.level != old.level) {
 		// Split on level
-		if (settings["level"])
+		if(settings["level"])
 		{
 			print("[TE:C Autosplitter] Timer split (level)");
 			return true;
 		}
 
 		// Split on area
-		if (settings["area"] && (current.level == 3 || current.level == 7 || current.level == 11
-		                     || current.level == 16 || current.level == 21 || current.level == 26))
+		if(settings["area"] && (current.level == 3 || current.level == 7 || current.level == 11
+		                    || current.level == 16 || current.level == 21 || current.level == 26))
 		{
 			print("[TE:C Autosplitter] Timer split (area)");
 			return true;
@@ -159,7 +159,7 @@ split
 	}
 
 	// Final split
-	if (current.lines >= 90)
+	if(current.lines >= 90)
 	{
 		print("[TE:C Autosplitter] Timer split (final)");
 		return true;
@@ -172,8 +172,12 @@ isLoading
 	return true;
 }
 
-// This is where the magic happens. Because the timer never counts on its own, this will always match IGT exactly.
+// Because the timer never counts on its own, this will always match IGT exactly
 gameTime
 {
-	return TimeSpan.FromSeconds(current.timer);
+	// This ensures the timer doesn't keep counting past the last line in case of extra splits
+	if(current.lines < 90)
+	{
+		return TimeSpan.FromSeconds(current.timer);
+	}
 }
