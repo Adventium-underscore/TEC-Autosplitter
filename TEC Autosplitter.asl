@@ -203,7 +203,7 @@ init
 			version = "Steam 1.3.1";
 			print("[TE:C Autosplitter] Detected Steam 1.3.1 game version");
 		}
-		else if(moduleSize == 86417072)
+		else if(moduleSize == 86147072)
 		{
 			version = "EGS 1.3.1";
 			print("[TE:C Autosplitter] Detected EGS 1.3.1 game version");
