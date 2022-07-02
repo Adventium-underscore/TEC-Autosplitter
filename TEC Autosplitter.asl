@@ -1,5 +1,6 @@
 /*
  * Current supported versions:
+ * 1.3.2 Win10/Steam/EGS
  * 1.3.1 Win10/Steam/EGS
  * 1.3.0 Win10/Steam/EGS
  * 1.2.9 Win10/Steam/EGS
@@ -16,6 +17,28 @@
  * This works because a pointer path returns 0 when it's unresolved
  * We can't reuse a different variable because those all use 0 as a normal value
  */
+ 
+state("TetrisEffect-WinGDK-Shipping", "Win10 1.3.2")
+{
+	int ingame  : 0x5029A88, 0x8, 0x838, 0x960, 0x328, 0x2C0;
+	float timer : 0x5029A88, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x10C;
+	int lines   : 0x5029A88, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x120;
+	int level   : 0x5029A88, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x8, 0x254;
+}
+state("TetrisEffect-Win64-Shipping", "Steam 1.3.2")
+{
+	int ingame  : 0x4DD30D8, 0x8, 0x838, 0x960, 0x328, 0x2C0;
+	float timer : 0x4DD30D8, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x10C;
+	int lines   : 0x4DD30D8, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x120;
+	int level   : 0x4DD30D8, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x8, 0x254;
+}
+state("TetrisEffect-Win64-Shipping", "EGS 1.3.2")
+{
+	int ingame  : 0x4D7DF18, 0x8, 0x838, 0x960, 0x328, 0x2C0;
+	float timer : 0x4D7DF18, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x10C;
+	int lines   : 0x4D7DF18, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x120;
+	int level   : 0x4D7DF18, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x8, 0x254;
+}
  
 state("TetrisEffect-WinGDK-Shipping", "Win10 1.3.1")
 {
@@ -198,7 +221,18 @@ init
 	print("[TE:C Autosplitter] Module detected: " + mainModule.ModuleName + " with size " + moduleSize);
 	if(String.Equals(mainModule.ModuleName, "TetrisEffect-Win64-Shipping.exe"))
 	{
-		if(moduleSize == 86450176)
+		if(moduleSize == 86540288)
+		{
+			version = "Steam 1.3.2";
+			print("[TE:C Autosplitter] Detected Steam 1.3.2 game version");
+		}
+		else if(moduleSize == 86167552)
+		{
+			version = "EGS 1.3.2";
+			print("[TE:C Autosplitter] Detected EGS 1.3.2 game version");
+		}
+		
+		else if(moduleSize == 86450176)
 		{
 			version = "Steam 1.3.1";
 			print("[TE:C Autosplitter] Detected Steam 1.3.1 game version");
@@ -277,7 +311,13 @@ init
 	}
 	else if(String.Equals(mainModule.ModuleName, "TetrisEffect-WinGDK-Shipping.exe"))
 	{
-		if(moduleSize == 89022464)
+		if(moduleSize == 89141248)
+		{
+			version = "Win10 1.3.2";
+			print("[TE:C Autosplitter] Detected Win10 1.3.2 game version");
+		}
+		
+		else if(moduleSize == 89022464)
 		{
 			version = "Win10 1.3.1";
 			print("[TE:C Autosplitter] Detected Win10 1.3.1 game version");
