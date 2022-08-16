@@ -2,18 +2,17 @@
 
 This autosplitter is designed to record IGT for Tetris Effect: Connected speedruns.
 
-The Autosplitter will automatically be downloaded by LiveSplit. When you select Tetris Effect: Connected as your game, an option will show up to activate the Autosplitter. Activate it, then click Settings to change when it will split.
+The autosplitter will automatically be downloaded by LiveSplit. When you select Tetris Effect: Connected as your game, an option will show up to activate the autosplitter. Activate it, then click Settings to change when it will split.
 
-If you check Split on Area, the Autosplitter will split at the end of every area. If you check Split on Level, the Autosplitter will split at the end of each of the 27 levels.
+If you check Split on Area, the autosplitter will split at the end of every area. If you check Split on Level, the autosplitter will split at the end of each of the 27 levels.
 
-If you uncheck Split on Area (which will also uncheck Split on Level), the Autosplitter will still start and reset the timer, and will split at the end of the run. This will work if you don't have any splits.
+If you uncheck Split on Area (which will also uncheck Split on Level), the autosplitter will still start and reset the timer, and will split at the end of the run. This will work if you don't have any splits.
 
+Big thanks to Jujstme for implementing sigscanning to find the base address dynamically, so I don't have to update the autosplitter for every game update.
 _________
 
 ### Troubleshooting:
 
-For an unknown reason, the Autosplitter doesn't always work the first time. If it doesn't work right away, try again. If this fixes the problem, you shouldn't run into it again.
+If the timer will start, split, and reset, but doesn't show IGT, check your timer's layout settings. The correct time will display if the timer is set to Game Time, or Current Timing Method while you have TE:C splits open.
 
-If the Autosplitter still doesn't work, open the autosplitter settings while the game is open, and verify that it has found the correct game version, shown in the top right of the autosplitter settings. If you don't see anything, close and reopen the game.
-
-If the Autosplitter shows the wrong version, doesn't show any version even after reopening the game, or otherwise doesn't work for some reason, contact me (Adventium_) by sending a message on speedrun.com or on the Github repository.
+Other than that, create an issue here or message me here or on speedrun.com for help.
