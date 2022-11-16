@@ -31,13 +31,13 @@ init {
 	if (baseAddr == IntPtr.Zero) throw new NullReferenceException();
 	// From this base offset, use pointer paths to find the values we need.
 	vars.watchers = new MemoryWatcherList {
-		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x838, 0x960, 0x328, 0x2C0))
+		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x838, 0xA08, 0x328, 0x2C0))
 											  {Name = "ingame", FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull},
-		new MemoryWatcher<float>(new DeepPointer(baseAddr, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x10C))
+		new MemoryWatcher<float>(new DeepPointer(baseAddr, 0x8, 0x838, 0xA08, 0x328, 0x2C0, 0x10C))
 												{Name = "timer", FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull},
-		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x8, 0x254))
+		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x838, 0xA08, 0x328, 0x2C0, 0x8, 0x254))
 											  {Name = "level", FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull},
-		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x838, 0x960, 0x328, 0x2C0, 0x120))
+		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x838, 0xA08, 0x328, 0x2C0, 0x120))
 											  {Name = "lines", FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull}
 	};
 	print("[TE:C Autosplitter] Initialization complete.");
