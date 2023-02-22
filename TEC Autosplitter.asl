@@ -1,6 +1,6 @@
 /*
  * Current supported versions:
- * 1.3.4+
+ * 2.0.0+
  */
 state("TetrisEffect-Win64-Shipping") {}
 state("TetrisEffect-WinGDK-Shipping") {}
@@ -29,15 +29,16 @@ init {
 								  {OnFound = (p, s, addr) => addr + 0x4 + p.ReadValue<int>(addr)};
 	var baseAddr = new SignatureScanner(game, modules.First().BaseAddress, modules.First().ModuleMemorySize).Scan(target);
 	if (baseAddr == IntPtr.Zero) throw new NullReferenceException();
+	print("[TE:C Autosplitter] Found base address " + baseAddr + " with module address " + modules.First().BaseAddress);
 	// From this base offset, use pointer paths to find the values we need.
 	vars.watchers = new MemoryWatcherList {
 		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x800, 0xA10, 0x328, 0x2C0))
 											  {Name = "ingame", FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull},
-		new MemoryWatcher<float>(new DeepPointer(baseAddr, 0x8, 0x800, 0xA10, 0x328, 0x2C0, 0x10C))
+		new MemoryWatcher<float>(new DeepPointer(baseAddr, 0x8, 0x800, 0xA10, 0x328, 0x2C0, 0x124))
 												{Name = "timer", FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull},
-		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x800, 0xA10, 0x328, 0x2C0, 0x8, 0x254))
+		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x800, 0xA10, 0x328, 0x2C0, 0x10, 0x254))
 											  {Name = "level", FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull},
-		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x800, 0xA10, 0x328, 0x2C0, 0x120))
+		new MemoryWatcher<int>(new DeepPointer(baseAddr, 0x8, 0x800, 0xA10, 0x328, 0x2C0, 0x128))
 											  {Name = "lines", FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull}
 	};
 	print("[TE:C Autosplitter] Initialization complete.");
