@@ -16,7 +16,7 @@ startup {
 	settings.Add("area", true, "Split On Area");
 	settings.SetToolTip("area", "Automatically splits on every area transition.");
 
-	settings.Add("level", true, "Split On Level", "area");
+	settings.Add("level", false, "Split On Level", "area");
 	settings.SetToolTip("level", "Automatically splits on every level transition.");
 }
 
